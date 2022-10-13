@@ -1,0 +1,35 @@
+# Remove "^M" from ends of lines in input CSV files
+foreach i ( `\ls [456]*.csv` )
+  awk '{sub(/\r/,"")}1' ${i} > temp_commands.csv
+  \mv -f temp_commands.csv ${i}
+end
+
+# Remove or replace probematic strings in all input CSV files:
+#  - Replace "# obs" and "#obs" with "Nobs"
+#  - Remove "(m/s)" units
+#  - Replace "log(g)" with "logg"
+#  - Replace "(J2000)" with "J2000"
+#  - Replace "[Fe/H]" with "FeH"
+#  - Remove all white spaces
+#  - Remove any leading "#"
+#  - Remove any "~" characters
+#  - Remove any "--" strings
+#  - Remove any "nan" strings
+foreach i ( `\ls [456]*.csv` )
+  sed -e 's/# obs/Nobs/g' -e 's/#obs/Nobs/g' -e 's/log(g)/logg/g' -e 's/(m\/s)//g' -e 's/(J2000)/J2000/g' -e 's/\[Fe\/H\]/FeH/g' -e 's/ //g' -e 's/~//g' -e 's/--//g' -e 's/nan//g' -e 's/^#//' -e 's/^ //' ${i} > temp_commands.csv
+  \mv -f temp_commands.csv ${i}
+end
+
+# Create simplified transition pair file
+\rm temp_commands1.csv temp_commands2.csv
+@ i = `wc NIST_formatted_low_level_pairs_q.txt | awk '{print $1}'`
+@ j = $i + 1
+foreach LINE ( `seq 2 3 $i` )
+  sed ''${LINE}'q;d' NIST_formatted_low_level_pairs_q.txt | cut -c 1-30,158-170 | sed -e 's/|/,/g' -e 's/ //g' >> temp_commands1.csv
+end
+foreach LINE ( `seq 3 3 $j` )
+  sed ''${LINE}'q;d' NIST_formatted_low_level_pairs_q.txt | cut -c 1-30,158-170 | sed -e 's/|/,/g' -e 's/ //g' >> temp_commands2.csv
+end
+echo "lambda1,omega1,ion1,q1,dq1,lambda2,omega2,ion2,q2,dq2" > transition_pairs.csv
+paste -d"," temp_commands1.csv temp_commands2.csv >> transition_pairs.csv
+\rm temp_commands[12].csv
