@@ -1,17 +1,14 @@
 # alpha_SolarTwins22
 
-<!---
-<a href="https://doi.org/10.5281/zenodo.XXXXXXX"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg" alt="DOI"></a>
---->
+<a href="https://doi.org/10.5281/zenodo.7196515"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7196515.svg" alt="DOI"></a>
 
 Supplementary code and data for constraining variations in the fine-structure constant between solar twin stars (Murphy et al. 2022, submitted).
 
 Read this README, and view/download/use the files within this repository, in conjunction with a careful read of the paper itself.
 
 If you use any of the materials in this repository, please cite the paper. If you want to cite only the data and/or fits (for some reason), please use the DOI:
-<!---
-<a href="https://doi.org/10.5281/zenodo.XXXXXXX"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXX.svg" alt="DOI"></a>
---->
+<a href="https://doi.org/10.5281/zenodo.7196515"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7196515.svg" alt="DOI"></a>
+
 
 <!---
 The paper is available at the following websites, in published or pre-print form:<br>
